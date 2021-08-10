@@ -69,21 +69,12 @@ const checkWin = () => {
 
 // listen for the start game button to be pressed
 startButton.addEventListener('click', () => {
-    // from reset
     phrase.style.display = 'revert'; // this "fixes" the "fix" from lines 61 or 66
     missed = 0; 
     for (let i = 0; i < image.length; i++) {
         image[i].src = 'images/liveHeart.png';
     }
-    // let oldLetters = document.querySelectorAll('.letter');
-    // for (let j = 0; j < oldLetters.length; j++) {
-    //     oldLetters[j].remove();
-    // }
-    // let oldSpaces = document.querySelectorAll('.space');
-    // for (let k = 0; k < oldSpaces.length; k++) {
-    //     oldSpaces[k].remove();
-    // }
-    phrase.firstElementChild.innerHTML = ''; // instead of above commented out code
+    phrase.firstElementChild.innerHTML = ''; 
     let oldKeys = document.querySelectorAll('.chosen')
     for (let l = 0; l < oldKeys.length; l++) {
         oldKeys[l].removeAttribute('disabled');
@@ -91,11 +82,10 @@ startButton.addEventListener('click', () => {
     for (let m = 0; m < oldKeys.length; m++) {
         oldKeys[m].classList.remove("chosen");
     }
-    // end from reset
-    overlay.style.display = 'none';  // original start
+    overlay.style.display = 'none';
     let phraseArray = getRandomPhraseAsArray(phrases);
-    getRandomPhraseAsArray(phrases);  // original start
-    addPhraseToDisplay(phraseArray);  // original start
+    getRandomPhraseAsArray(phrases); 
+    addPhraseToDisplay(phraseArray);  
 });
 
 // listen for the onscreen keyboard to be clicked
@@ -108,7 +98,6 @@ qwerty.addEventListener('click', e => {
             missed++;
             image[missed - 1].src = 'images/lostHeart.png';
         }
-        // checkWin() function call would go here
         checkWin();
     }
 });
