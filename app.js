@@ -6,11 +6,11 @@ let image = document.getElementsByTagName('img');
 let missed = 0;
 
 const phrases = [
-    'first phrase', 
-    'second phrase', 
-    'third phrase', 
-    'fourth phrase',
-    'fifth phrase'
+    'in space no one can hear you scream', 
+    'get to the chopper', 
+    'come with me if you want to live', 
+    'may the force be with you',
+    'take the gun leave the cannoli'
 ];
 
 // return a random phrase from an array
@@ -112,31 +112,3 @@ qwerty.addEventListener('click', e => {
     }
 });
 
-
-// hopeful reset function
-const resetGame = () => {
-    phrase.style.display = 'revert'; // this "fixes" the "fix" from lines 61 or 66
-    missed = 0; 
-    for (let i = 0; i < image.length; i++) {
-        image[i].src = 'images/liveHeart.png';
-    }
-    let oldLetters = document.querySelectorAll('.letter');
-    for (let j = 0; j < oldLetters.length; j++) {
-        oldLetters[j].remove();
-    }
-    let oldSpaces = document.querySelectorAll('.space');
-    for (let k = 0; k < oldSpaces.length; k++) {
-        oldSpaces[k].remove();
-    }
-    let oldKeys = document.querySelectorAll('.chosen')
-    for (let l = 0; l < oldKeys.length; l++) {
-        oldKeys[l].removeAttribute('disabled');
-    }
-    for (let m = 0; m < oldKeys.length; m++) {
-        oldKeys[m].classList.remove("chosen");
-    }
-    
-    overlay.style.display = 'none';  // original start
-    getRandomPhraseAsArray(phrases);  // original start
-    addPhraseToDisplay(phraseArray);  // original start
-};
