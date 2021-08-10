@@ -58,20 +58,43 @@ const checkWin = () => {
         overlay.classList.add('win');
         overlay.firstElementChild.textContent = 'You won!';
         overlay.style.display = 'flex';
-        phrase.style.display = 'none';
+        phrase.style.display = 'none'; // unsure why, but transition/transform for displayed letters shows on top of win/loss overlay, this fixes
     } else if (missed > 4) {
         overlay.classList.add('lose');
         overlay.firstElementChild.textContent = 'You lost!';
         overlay.style.display = 'flex';
-        phrase.style.display = 'none';
+        phrase.style.display = 'none'; // unsure why, but transition/transform for displayed letters shows on top of win/loss overlay, this fixes
     }
+    startButton.textContent = "Play Again?";
 }
 
 // listen for the start game button to be pressed
 startButton.addEventListener('click', () => {
-    overlay.style.display = 'none';
-    getRandomPhraseAsArray(phrases);
-    addPhraseToDisplay(phraseArray);
+    // from reset
+    phrase.style.display = 'revert'; // this "fixes" the "fix" from lines 61 or 66
+    missed = 0; 
+    for (let i = 0; i < image.length; i++) {
+        image[i].src = 'images/liveHeart.png';
+    }
+    let oldLetters = document.querySelectorAll('.letter');
+    for (let j = 0; j < oldLetters.length; j++) {
+        oldLetters[j].remove();
+    }
+    let oldSpaces = document.querySelectorAll('.space');
+    for (let k = 0; k < oldSpaces.length; k++) {
+        oldSpaces[k].remove();
+    }
+    let oldKeys = document.querySelectorAll('.chosen')
+    for (let l = 0; l < oldKeys.length; l++) {
+        oldKeys[l].removeAttribute('disabled');
+    }
+    for (let m = 0; m < oldKeys.length; m++) {
+        oldKeys[m].classList.remove("chosen");
+    }
+    // end from reset
+    overlay.style.display = 'none';  // original start
+    getRandomPhraseAsArray(phrases);  // original start
+    addPhraseToDisplay(phraseArray);  // original start
 });
 
 // listen for the onscreen keyboard to be clicked
@@ -89,3 +112,31 @@ qwerty.addEventListener('click', e => {
     }
 });
 
+
+// hopeful reset function
+const resetGame = () => {
+    phrase.style.display = 'revert'; // this "fixes" the "fix" from lines 61 or 66
+    missed = 0; 
+    for (let i = 0; i < image.length; i++) {
+        image[i].src = 'images/liveHeart.png';
+    }
+    let oldLetters = document.querySelectorAll('.letter');
+    for (let j = 0; j < oldLetters.length; j++) {
+        oldLetters[j].remove();
+    }
+    let oldSpaces = document.querySelectorAll('.space');
+    for (let k = 0; k < oldSpaces.length; k++) {
+        oldSpaces[k].remove();
+    }
+    let oldKeys = document.querySelectorAll('.chosen')
+    for (let l = 0; l < oldKeys.length; l++) {
+        oldKeys[l].removeAttribute('disabled');
+    }
+    for (let m = 0; m < oldKeys.length; m++) {
+        oldKeys[m].classList.remove("chosen");
+    }
+    
+    overlay.style.display = 'none';  // original start
+    getRandomPhraseAsArray(phrases);  // original start
+    addPhraseToDisplay(phraseArray);  // original start
+};
