@@ -20,7 +20,6 @@ const getRandomPhraseAsArray = arr => {
     return phraseArray;
 }
 
-let phraseArray = getRandomPhraseAsArray(phrases);
 
 // adds the letters of a string to the display
 const addPhraseToDisplay = arr => {
@@ -28,7 +27,7 @@ const addPhraseToDisplay = arr => {
         let li = document.createElement('LI');
         let ul = phrase.firstElementChild;
         li.textContent = arr[i];
-        phrase.appendChild(li);
+        ul.appendChild(li);
         if (li.textContent !== ' ') {
             li.classList.add("letter");
         } else {
@@ -55,12 +54,12 @@ const checkWin = () => {
     let correctLetter = document.getElementsByClassName('letter');
     let showLetter = document.getElementsByClassName('show');
     if (correctLetter.length === showLetter.length) {
-        overlay.classList.add('win');
+        overlay.className = 'win';
         overlay.firstElementChild.textContent = 'You won!';
         overlay.style.display = 'flex';
         phrase.style.display = 'none'; // unsure why, but transition/transform for displayed letters shows on top of win/loss overlay, this fixes
     } else if (missed > 4) {
-        overlay.classList.add('lose');
+        overlay.className = 'lose';
         overlay.firstElementChild.textContent = 'You lost!';
         overlay.style.display = 'flex';
         phrase.style.display = 'none'; // unsure why, but transition/transform for displayed letters shows on top of win/loss overlay, this fixes
@@ -76,14 +75,15 @@ startButton.addEventListener('click', () => {
     for (let i = 0; i < image.length; i++) {
         image[i].src = 'images/liveHeart.png';
     }
-    let oldLetters = document.querySelectorAll('.letter');
-    for (let j = 0; j < oldLetters.length; j++) {
-        oldLetters[j].remove();
-    }
-    let oldSpaces = document.querySelectorAll('.space');
-    for (let k = 0; k < oldSpaces.length; k++) {
-        oldSpaces[k].remove();
-    }
+    // let oldLetters = document.querySelectorAll('.letter');
+    // for (let j = 0; j < oldLetters.length; j++) {
+    //     oldLetters[j].remove();
+    // }
+    // let oldSpaces = document.querySelectorAll('.space');
+    // for (let k = 0; k < oldSpaces.length; k++) {
+    //     oldSpaces[k].remove();
+    // }
+    phrase.firstElementChild.innerHTML = ''; // instead of above commented out code
     let oldKeys = document.querySelectorAll('.chosen')
     for (let l = 0; l < oldKeys.length; l++) {
         oldKeys[l].removeAttribute('disabled');
@@ -93,6 +93,7 @@ startButton.addEventListener('click', () => {
     }
     // end from reset
     overlay.style.display = 'none';  // original start
+    let phraseArray = getRandomPhraseAsArray(phrases);
     getRandomPhraseAsArray(phrases);  // original start
     addPhraseToDisplay(phraseArray);  // original start
 });
