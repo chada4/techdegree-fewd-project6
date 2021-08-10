@@ -58,10 +58,12 @@ const checkWin = () => {
         overlay.classList.add('win');
         overlay.firstElementChild.textContent = 'You won!';
         overlay.style.display = 'flex';
+        phrase.style.display = 'none';
     } else if (missed > 4) {
         overlay.classList.add('lose');
         overlay.firstElementChild.textContent = 'You lost!';
         overlay.style.display = 'flex';
+        phrase.style.display = 'none';
     }
 }
 
